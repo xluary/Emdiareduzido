@@ -3,7 +3,7 @@ from datetime import date
 
 class PessoaBase(BaseModel):
     nome: str
-    cpf: int # CPF como inteiro
+    cpf: str # CPF como inteiro
     email: str
 
 class PessoaCreate(PessoaBase):

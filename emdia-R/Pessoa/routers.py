@@ -15,14 +15,14 @@ def create_pessoa(pessoa: PessoaCreate, db: Session = Depends(get_db)):
     return db_pessoa
 
 @router.get("/read/{cpf}", response_model=PessoaOut)
-def read_pessoa(cpf: int, db: Session = Depends(get_db)):
+def read_pessoa(cpf: str, db: Session = Depends(get_db)):
     pessoa = db.query(Pessoa).filter(Pessoa.cpf == cpf).first()
     if not pessoa:
         raise HTTPException(status_code=404, detail="Pessoa não encontrada")
     return pessoa
 
 @router.put("/update/{cpf}", response_model=PessoaOut)
-def update_pessoa(cpf: int, pessoa: PessoaCreate, db: Session = Depends(get_db)):
+def update_pessoa(cpf: str, pessoa: PessoaCreate, db: Session = Depends(get_db)):
     db_pessoa = db.query(Pessoa).filter(Pessoa.cpf == cpf).first()
     if not db_pessoa:
         raise HTTPException(status_code=404, detail="Pessoa não encontrada")
@@ -33,7 +33,7 @@ def update_pessoa(cpf: int, pessoa: PessoaCreate, db: Session = Depends(get_db))
     return db_pessoa
 
 @router.delete("/delete/{cpf}", response_model=PessoaOut)
-def delete_pessoa(cpf: int, db: Session = Depends(get_db)):
+def delete_pessoa(cpf: str, db: Session = Depends(get_db)):
     db_pessoa = db.query(Pessoa).filter(Pessoa.cpf == cpf).first()
     if not db_pessoa:
         raise HTTPException(status_code=404, detail="Pessoa não encontrada")
