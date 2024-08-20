@@ -5,7 +5,7 @@ from shared.database import Base
 class Consulta(Base):
     __tablename__ = "consultas"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True,autoincrement=True)
     id_paciente = Column(Integer, ForeignKey('pacientes.numeroSUS'), index=True)
     id_funcionario = Column(String(255), ForeignKey('funcionarios.id'), index=True)
     data = Column(Date)
